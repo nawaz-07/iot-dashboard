@@ -3,8 +3,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Device
 from .serializers import DeviceSerializer
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
 
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def device_list(request):
     if request.method == 'GET':
         devices = Device.objects.all()
